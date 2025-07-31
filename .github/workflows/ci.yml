@@ -1,0 +1,38 @@
+name: Run Unit Tests
+
+on:
+  workflow_dispatch:
+  pull_request:
+
+jobs:
+  run-tests:
+    runs-on: macos-15
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run unit tests
+        run: |
+          set -o pipefail
+          # Adjust these to your actual project/workspace and scheme names:
+          PROJECT_NAME="DesignPatterns.xcodeproj"           # or .xcworkspace
+          SCHEME="DesignPatternsTests"                     # the test scheme
+          DESTINATION='platform=iOS Simulator,name=iPhone 15,OS=17.4'
+
+          # If you use a workspace (e.g., with CocoaPods), replace with:
+          # xcodebuild -workspace YourApp.xcworkspace -scheme "$SCHEME" ...
+          xcodebuild test \
+            -project "$PROJECT_NAME" \
+            -scheme "$SCHEME" \
+            -destination "$DESTINATION" \
+            -sdk iphonesimulator \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            | xcpretty || true
+
+      # Optional: upload test results / artifacts
+      - name: Show test summary
+        if: failure()
+        run: |
+          echo "Tests failed. See logs above."

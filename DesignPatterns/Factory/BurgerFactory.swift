@@ -7,7 +7,7 @@
 
 import Foundation
 
-fileprivate class Burger {
+class SimpleBurger {
     
     var ingredients: [String]
     
@@ -26,13 +26,13 @@ fileprivate class Burger {
 ///
 fileprivate class BurgerFactory {
     
-    func createCheeseBurger() -> Burger {
+    func createCheeseBurger() -> SimpleBurger {
         let ingredients = ["cheese", "bun", "lettuce", "tomato"]
-        return Burger(ingredients: ingredients)
+        return SimpleBurger(ingredients: ingredients)
     }
     
-    func createVeggieBurger() -> Burger {
+    func createVeggieBurger() -> SimpleBurger {
         let ingredients = ["veggie", "bun", "onion", "carrot", "lettuce", "tomato"]
-        return Burger(ingredients: ingredients)
+        return SimpleBurger(ingredients: ingredients)
     }
 }

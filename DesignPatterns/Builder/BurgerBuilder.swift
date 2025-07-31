@@ -7,7 +7,7 @@
 
 import Foundation
 
-fileprivate class Burger {
+class Burger {
     
     var bun: String?
     var patty: String?
@@ -37,19 +37,22 @@ fileprivate class Burger {
 ///
 ///
 
-fileprivate class BurgerBuilder {
+class BurgerBuilder {
     var burger: Burger = Burger()
     
+    @discardableResult
     func setBun(_ bun: String) -> Self {
         burger.setBun(bun)
         return self
     }
     
+    @discardableResult
     func setPatty(_ patty: String) -> Self {
         burger.setPatty(patty)
         return self
     }
     
+    @discardableResult
     func setCheese(_ cheese: String) -> Self {
         burger.setCheese(cheese)
         return self
